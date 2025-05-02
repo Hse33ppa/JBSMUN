@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JBSMUN | Jumeirah Baccalaureate School Model United Nations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+        
+        body {
+            overflow-x: hidden;
+            padding-top: 80px;
+            margin: 0;
+        }
+        
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            margin-top: -1px; /* Remove white space */
+        }
+        
+        .committee-card {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+            transform: translateY(50px);
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .committee-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .committee-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .team-member img {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .team-member:hover img {
+            transform: scale(1.05);
+        }
+        
+        .flag-bg {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1973&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        .stagger-delay-5 { transition-delay: 0.5s; }
+        
+        #mobile-menu {
+            transition: all 0.6s cubic-bezier(0.32, 0, 0.67, 0);
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-10px);
+        }
+        
+        #mobile-menu.open {
+            max-height: 500px;
+            opacity: 1;
+            transform: translateY(0);
+            padding-bottom: 1rem;
+        }
+
+        .mobile-menu-item {
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transform: translateY(10px);
+            opacity: 0;
+        }
+
+        #mobile-menu.open .mobile-menu-item {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #mobile-menu.open .mobile-menu-item:nth-child(1) { transition-delay: 0.1s; }
+        #mobile-menu.open .mobile-menu-item:nth-child(2) { transition-delay: 0.15s; }
+        #mobile-menu.open .mobile-menu-item:nth-child(3) { transition-delay: 0.2s; }
+        #mobile-menu.open .mobile-menu-item:nth-child(4) { transition-delay: 0.25s; }
+        #mobile-menu.open .mobile-menu-item:nth-child(5) { transition-delay: 0.3s; }
+        
+        .faq-content {
+            transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        
+        .faq-content.active {
+            max-height: 500px;
+            opacity: 1;
+        }
+        
+        .faq-toggle i {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .faq-toggle.active i {
+            transform: rotate(180deg);
+        }
+        
+        .bg-primary { background-color: #702F8A; }
+        .bg-secondary { background-color: #9CCA3A; }
+        .text-primary { color: #702F8A; }
+        .text-secondary { color: #009B77; }
+        .border-primary { border-color: #702F8A; }
+        .hover\:bg-primary:hover { background-color: #5a256e; } /* Darker purple */
+        .hover\:bg-secondary:hover { background-color: #82a930; } /* Darker lime green */
+
+        .countdown-container {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            backdrop-filter: blur(10px);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
+        }
+        
+        .countdown-container.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 80px;
+            transition: transform 0.3s ease;
+        }
+        
+        .countdown-item:hover {
+            transform: scale(1.05);
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: white;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .btn-hover {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(0);
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .floating-delay-1 {
+            animation-delay: 0.5s;
+        }
+        
+        .floating-delay-2 {
+            animation-delay: 1s;
+        }
+
+        /* Menu toggle animation */
+        .menu-toggle-icon {
+            transition: transform 0.6s cubic-bezier(0.32, 0, 0.67, 0);
+        }
+
+        .menu-toggle-icon.open {
+            transform: rotate(90deg);
+        }
+
+        /* Committee modal styles */
+        .committee-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .committee-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .committee-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #003366;
+            transition: transform 0.3s ease;
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        /* Improved mobile menu animation */
+        .mobile-menu-container {
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            transform-origin: top;
+            transform: scaleY(0);
+            opacity: 0;
+            height: 0;
+        }
+
+        .mobile-menu-container.open {
+            transform: scaleY(1);
+            opacity: 1;
+            height: auto;
+        }
+
+        /* Fixed header styles - updated to never move */
+        #navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Difficulty level tags */
+        .difficulty-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+        }
+
+        .beginner {
+            background-color: #10B981;
+            color: white;
+        }
+
+        .intermediate {
+            background-color: #F59E0B;
+            color: white;
+        }
+
+        .advanced {
+            background-color: #EF4444;
+            color: white;
+        }
+
+        /* Filter buttons */
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .filter-btn.active {
+            border-color: #702F8A;
+            background-color: #9CCA3A;
+            color: white;
+        }
+
+        .committee-card.hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg, .flag-bg {
+                background-attachment: scroll;
+            }
+            
+            .hero-bg {
+                padding-top: 100px;
+                padding-bottom: 100px;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
+            }
+            
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+
+            .modal-content {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Updated header with fixed positioning that never moves -->
+    <nav class="bg-primary text-white shadow-lg fixed top-0 left-0 right-0 z-50" id="navbar">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <img src="logo.jpg" alt="JBSMUN Logo" class="h-12 w-12 rounded-full">
+                    <a href="#" class="text-xl font-bold transition-opacity hover:opacity-80">JBSMUN</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link hover:text-blue-200">Home</a>
+                    <a href="#about" class="nav-link hover:text-blue-200">About</a>
+                    <a href="#committees" class="nav-link hover:text-blue-200">Committees</a>
+                    <a href="#team" class="nav-link hover:text-blue-200">Our Team</a>
+                    <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="bg-secondary hover:bg-blue-700 px-4 py-2 rounded-lg transition-all btn-hover">Register</a>
+                </div>
+                <button class="md:hidden focus:outline-none transition-transform hover:scale-110" id="menu-toggle">
+                    <i class="fas fa-bars text-xl menu-toggle-icon"></i>
+                </button>
+            </div>
+            <div class="mobile-menu-container md:hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-3 pt-4">
+                    <a href="#home" class="block py-2 hover:text-blue-200 transition mobile-menu-item">Home</a>
+                    <a href="#about" class="block py-2 hover:text-blue-200 transition mobile-menu-item">About</a>
+                    <a href="#committees" class="block py-2 hover:text-blue-200 transition mobile-menu-item">Committees</a>
+                    <a href="#team" class="block py-2 hover:text-blue-200 transition mobile-menu-item">Our Team</a>
+                    <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="block bg-secondary hover:bg-blue-700 px-4 py-2 rounded-lg mt-2 w-max transition mobile-menu-item btn-hover">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Committee Modal -->
+    <div class="committee-modal" id="committee-modal">
+        <div class="modal-content p-8">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/3">
+                    <div class="h-48 md:h-64 rounded-lg flex items-center justify-center" id="modal-committee-color">
+                        <i class="fas fa-balance-scale text-white text-6xl" id="modal-committee-icon"></i>
+                    </div>
+                </div>
+                <div class="md:w-2/3">
+                    <h2 class="text-2xl font-bold mb-4 text-primary" id="modal-committee-title">Committee Title</h2>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span id="modal-committee-delegates">25-30 Delegates</span>
+                        <span class="difficulty-tag beginner ml-4" id="modal-committee-difficulty">Beginner</span>
+                    </div>
+                    <div class="mb-6">
+                        <h3 class="font-bold text-lg mb-2 text-primary">About This Committee</h3>
+                        <p class="text-gray-700" id="modal-committee-description">Detailed description about the committee will appear here.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2 text-primary">Topics</h3>
+                        <ul class="list-disc pl-5 space-y-1 text-gray-700" id="modal-committee-topics">
+                            <li>Topic 1</li>
+                            <li>Topic 2</li>
+                            <li>Topic 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="home" class="hero-bg text-white py-32 min-h-screen flex items-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in-section">Jumeirah Baccalaureate School Model United Nations</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto fade-in-section stagger-delay-1">Shaping Future Leaders Through Diplomatic Debate</p>
+            <div class="countdown-container mb-8">
+                <h3 class="text-xl font-semibold mb-4">Conference Starts In:</h3>
+                <div class="flex justify-center space-x-4" id="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-value" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row justify-center gap-4 fade-in-section stagger-delay-2">
+                <a href="YOUR_GOOGLE_FORM_LINK_HERE" target="_blank" class="bg-secondary hover:bg-blue-700 text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all btn-hover">Register Now</a>
+                <a href="#about" class="bg-transparent border-2 border-white hover:bg-white hover:text-primary text-white px-8 py-3 rounded-lg text-lg font-semibold transition-all btn-hover">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-primary fade-in-section">About JBSMUN</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12 mb-16">
+                <div class="md:w-1/2 fade-in-section stagger-delay-1">
+                    <img src="https://images.unsplash.com/photo-1527525443983-6e60c75fff46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1065&q=80" alt="MUN Conference" class="rounded-lg shadow-xl w-full floating">
+                </div>
+                <div class="md:w-1/2 fade-in-section stagger-delay-2">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Our Mission</h3>
+                    <p class="text-gray-700 mb-4">JBSMUN is dedicated to fostering international understanding, diplomacy, and leadership among youth through simulation of the United Nations. Our conferences provide a platform for students to engage in critical thinking, public speaking, and negotiation.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="bg-blue-100 px-4 py-2 rounded-lg transition-all hover:scale-105">
+                            <span class="font-bold text-primary">200+</span> Delegates
+                        </div>
+                        <div class="bg-blue-100 px-4 py-2 rounded-lg transition-all hover:scale-105">
+                            <span class="font-bold text-primary">10+</span> Committees
+                        </div>
+                        <div class="bg-blue-100 px-4 py-2 rounded-lg transition-all hover:scale-105">
+                            <span class="font-bold text-primary">50+</span> Schools
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-blue-50 rounded-xl p-8 md:p-12 fade-in-section">
+                <h3 class="text-2xl font-bold mb-6 text-center text-primary">Why Participate in JBSMUN?</h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-xl">
+                        <div class="text-secondary text-4xl mb-4">
+                            <i class="fas fa-microphone floating"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Public Speaking</h4>
+                        <p class="text-gray-600">Develop confidence and eloquence in expressing your ideas in front of large audiences.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-xl">
+                        <div class="text-secondary text-4xl mb-4">
+                            <i class="fas fa-handshake floating floating-delay-1"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Diplomacy & Negotiation</h4>
+                        <p class="text-gray-600">Learn the art of compromise and building consensus among diverse viewpoints.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md text-center transition-all hover:shadow-xl">
+                        <div class="text-secondary text-4xl mb-4">
+                            <i class="fas fa-globe-americas floating floating-delay-2"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Global Awareness</h4>
+                        <p class="text-gray-600">Gain deep understanding of international relations and current global issues.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="committees" class="py-32 bg-gray-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary fade-in-section">Our Committees</h2>
+            
+            <!-- Filter Buttons -->
+            <div class="flex justify-center mb-12 fade-in-section">
+                <div class="flex flex-wrap gap-4 filter-buttons">
+                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200 active" data-filter="all">
+                        All Committees
+                    </button>
+                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="beginner">
+                        Beginner
+                    </button>
+                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="intermediate">
+                        Intermediate
+                    </button>
+                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="advanced">
+                        Advanced
+                    </button>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Beginner Committees -->
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="who" data-difficulty="beginner">
+                    <div class="h-48 bg-red-700 flex items-center justify-center">
+                        <i class="fas fa-heartbeat text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">World Health Organization</h3>
+                        <p class="text-gray-600 mb-4">Address global health crises, pandemic preparedness, and healthcare access.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>35-45 Delegates</span>
+                            <span class="difficulty-tag beginner ml-4">Beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="ecosoc" data-difficulty="beginner">
+                    <div class="h-48 bg-yellow-600 flex items-center justify-center">
+                        <i class="fas fa-coins text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">Economic and Social Council</h3>
+                        <p class="text-gray-600 mb-4">Focus on international economic cooperation and social development.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>50-60 Delegates</span>
+                            <span class="difficulty-tag beginner ml-4">Beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="unicef" data-difficulty="beginner">
+                    <div class="h-48 bg-blue-500 flex items-center justify-center">
+                        <i class="fas fa-child text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">UNICEF</h3>
+                        <p class="text-gray-600 mb-4">Address children's rights, education, and humanitarian aid worldwide.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>40-50 Delegates</span>
+                            <span class="difficulty-tag beginner ml-4">Beginner</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Intermediate Committees -->
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="unep" data-difficulty="intermediate">
+                    <div class="h-48 bg-green-700 flex items-center justify-center">
+                        <i class="fas fa-leaf text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">UN Environment Programme</h3>
+                        <p class="text-gray-600 mb-4">Tackle climate change, biodiversity loss, and sustainable development challenges.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>40-50 Delegates</span>
+                            <span class="difficulty-tag intermediate ml-4">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="csw" data-difficulty="intermediate">
+                    <div class="h-48 bg-pink-600 flex items-center justify-center">
+                        <i class="fas fa-female text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">Commission on the Status of Women</h3>
+                        <p class="text-gray-600 mb-4">Promote gender equality and the empowerment of women worldwide.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>30-40 Delegates</span>
+                            <span class="difficulty-tag intermediate ml-4">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="disarmament" data-difficulty="intermediate">
+                    <div class="h-48 bg-orange-600 flex items-center justify-center">
+                        <i class="fas fa-peace text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">Disarmament Committee</h3>
+                        <p class="text-gray-600 mb-4">Address arms control, non-proliferation, and international security issues.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>35-45 Delegates</span>
+                            <span class="difficulty-tag intermediate ml-4">Intermediate</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced Committees -->
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="unsc" data-difficulty="advanced">
+                    <div class="h-48 bg-primary flex items-center justify-center">
+                        <i class="fas fa-balance-scale text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">Security Council</h3>
+                        <p class="text-gray-600 mb-4">Address pressing issues of international peace and security with veto power dynamics.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>25-30 Delegates</span>
+                            <span class="difficulty-tag advanced ml-4">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="icj" data-difficulty="advanced">
+                    <div class="h-48 bg-purple-700 flex items-center justify-center">
+                        <i class="fas fa-gavel text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">International Court of Justice</h3>
+                        <p class="text-gray-600 mb-4">Simulate legal proceedings and adjudicate disputes between states.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>15-20 Delegates</span>
+                            <span class="difficulty-tag advanced ml-4">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="crisis" data-difficulty="advanced">
+                    <div class="h-48 bg-red-800 flex items-center justify-center">
+                        <i class="fas fa-fire text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-primary">Crisis Committee</h3>
+                        <p class="text-gray-600 mb-4">Respond to fast-breaking international crises with rapid decision-making.</p>
+                        <div class="flex items-center text-sm text-gray-500">
+                            <i class="fas fa-user-friends mr-2"></i>
+                            <span>20-25 Delegates</span>
+                            <span class="difficulty-tag advanced ml-4">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team" class="py-32 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-primary fade-in-section">Meet Our Team</h2>
+            <div class="mb-16 fade-in-section stagger-delay-1">
+                <h3 class="text-2xl font-bold mb-8 text-center text-primary">Secretariat</h3>
+                <div class="grid md:grid-cols-2 gap-8 justify-center">
+                    <div class="team-member bg-gray-50 rounded-xl p-6 text-center transition-all hover:shadow-lg">
+                        <div class="w-32 h-32 mx-auto mb-4 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="fas fa-user-tie text-secondary text-4xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold">Aadit Sureka</h4>
+                        <p class="text-secondary font-medium mb-2">Secretary General</p>
+                        <p class="text-gray-600 text-sm">Grade 12 | Jumeirah Baccalaureate School</p>
+                    </div>
+                    <div class="team-member bg-gray-50 rounded-xl p-6 text-center transition-all hover:shadow-lg">
+                        <div class="w-32 h-32 mx-auto mb-4 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="fas fa-user-tie text-secondary text-4xl"></i>
+                        </div>
+                        <h4 class="text-xl font-bold">Lea Tabbal</h4>
+                        <p class="text-secondary font-medium mb-2">Secretary General</p>
+                        <p class="text-gray-600 text-sm">Grade 12 | Jumeirah Baccalaureate School</p>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-in-section stagger-delay-2">
+                <h3 class="text-2xl font-bold mb-8 text-center text-primary">Committee Chairs</h3>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
+                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="fas fa-user text-secondary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold">UNSC Chair</h4>
+                        <p class="text-secondary text-sm mb-1">Security Council Chair</p>
+                        <p class="text-gray-600 text-xs">Their grade</p>
+                    </div>
+                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
+                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="fas fa-user text-secondary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold">WHO Chair</h4>
+                        <p class="text-secondary text-sm mb-1">WHO Chair</p>
+                        <p class="text-gray-600 text-xs">Grade 11</p>
+                    </div>
+                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
+                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="fas fa-user text-secondary text-2xl"></i>
+                        </div>
+                        <div class="font-bold">UNEP Chair</div>
+                        <p class="text-secondary text-sm mb-1">UNEP Chair</p>
+                        <p class="text-gray-600 text-xs"> Their grade</p>
+                    </div>
+                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
+                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="fas fa-user text-secondary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold">ECOSOC Chair</h4>
+                        <p class="text-secondary text-sm mb-1">ECOSOC Chair</p>
+                        <p class="text-gray-600 text-xs"> Their grade</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="register" class="flag-bg py-32">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden fade-in-section">
+                <div class="md:flex">
+                    <div class="md:w-1/2 bg-primary text-white p-8 md:p-12">
+                        <h2 class="text-3xl font-bold mb-6">Register for JBSMUN 2025</h2>
+                        <p class="mb-6">Join us for an unforgettable experience in diplomacy, debate, and leadership development.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-calendar-check text-blue-300"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-medium">June 20-22, 2025</p>
+                    <p class="text-blue-200 text-sm">2 days of intensive debate</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                    <i class="fas fa-map-marker-alt text-blue-300"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="font-medium">Jumeirah Baccalaureate School</p>
+                    <p class="text-blue-200 text-sm">Dubai, United Arab Emirates</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <div class="flex-shrink-0 mt-1">
+                    <i class="fas fa-users text-blue-300"></i>
+                </div>
+                <div class="ml-3">
+                    <p class="font-medium">300+ Delegates Expected</p>
+                    <p class="text-blue-200 text-sm">From top schools in Dubai</p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-8 pt-6 border-t border-blue-800">
+            <h3 class="font-bold mb-3">Registration Fees</h3>
+            <ul class="space-y-2">
+                <li class="flex justify-between">
+                    <span>Early Bird </span>
+                    <span class="font-bold">AED 200</span>
+                </li>
+                <li class="flex justify-between">
+                    <span>Regular </span>
+                    <span class="font-bold">AED 250</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="md:w-1/2 p-8 md:p-12 flex flex-col items-center justify-center">
+        <h3 class="text-2xl font-bold mb-6 text-center text-primary">Online Registration</h3>
+        <p class="text-gray-600 mb-8 text-center">Click the button below to complete your registration through our Google Form:</p>
+        <a href="YOUR_GOOGLE_FORM_LINK_HERE" 
+           target="_blank"
+           class="w-full bg-secondary hover:bg-primary text-white font-bold py-3 px-4 rounded-md transition-all duration-300 text-center btn-hover">
+            Go to Registration Form
+        </a>
+        <p class="text-sm text-gray-500 mt-4 text-center">
+            <i class="fas fa-external-link-alt mr-2"></i>
+            You'll be redirected to Google Forms
+        </p>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-32 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-primary fade-in-section">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+            <div class="border border-gray-200 rounded-lg overflow-hidden fade-in-section stagger-delay-1">
+                <button class="faq-toggle w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                    <span class="font-medium text-left">Who can participate in JBSMUN?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-content p-4 border-t border-gray-200">
+                    <p class="text-gray-600">JBSMUN is open to high school students from Grade 9 to Grade 12. We welcome both experienced delegates and complete beginners. If you're passionate about international affairs and willing to learn, you'll fit right in!</p>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden fade-in-section stagger-delay-2">
+                <button class="faq-toggle w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                    <span class="font-medium text-left">What should I prepare before the conference?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-content p-4 border-t border-gray-200">
+                    <p class="text-gray-600 mb-2">After registration, you'll receive:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-gray-600">
+                        <li>Country and committee assignments</li>
+                        <li>Background guides for your committee topics</li>
+                        <li>Research resources and preparation tips</li>
+                        <li>Position paper guidelines (optional but recommended)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden fade-in-section stagger-delay-3">
+                <button class="faq-toggle w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                    <span class="font-medium text-left">Can I participate with a group from my school?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-content p-4 border-t border-gray-200">
+                    <p class="text-gray-600">Absolutely! We encourage school groups to participate together. </p>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden fade-in-section stagger-delay-4">
+                <button class="faq-toggle w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                    <span class="font-medium text-left">What is the dress code for the conference?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-content p-4 border-t border-gray-200">
+                    <p class="text-gray-600">Delegates are expected to wear Western business attire throughout the conference. For gentlemen, this means suits or dress pants with dress shirts and ties. For ladies, this means business suits, dresses, or skirts with blouses. National dress is also acceptable.</p>
+                </div>
+            </div>
+            <div class="border border-gray-200 rounded-lg overflow-hidden fade-in-section stagger-delay-5">
+                <button class="faq-toggle w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
+                    <span class="font-medium text-left">Will meals be provided during the conference?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="faq-content p-4 border-t border-gray-200">
+                    <p class="text-gray-600">Yes, light refreshments will be provided during breaks. Lunch will also be provided.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="fade-in-section">
+                <h3 class="text-xl font-bold mb-4">JBSMUN</h3>
+                <p class="text-gray-400">Empowering future leaders through authentic United Nations simulations.</p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="https://www.instagram.com/jbsmun?igsh=NWIwazJyNmEyOWhv" target="_blank" class="text-gray-400 hover:text-white transition-transform hover:scale-110">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="fade-in-section stagger-delay-1">
+                <h4 class="font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-2">
+                    <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                    <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                    <li><a href="#committees" class="text-gray-400 hover:text-white transition">Committees</a></li>
+                    <li><a href="#team" class="text-gray-400 hover:text-white transition">Our Team</a></li>
+                    <li><a href="#register" class="text-gray-400 hover:text-white transition">Register</a></li>
+                </ul>
+            </div>
+            <div class="fade-in-section stagger-delay-2">
+                <h4 class="font-bold mb-4">Contact Us</h4>
+                <ul class="space-y-2">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-2 text-gray-400"></i>
+                        <span class="text-gray-400">Jumeirah Baccalaureate School, Dubai, UAE</span>
+                    </li>
+                    <li class="flex items-start">
+                        <i class="fas fa-envelope mt-1 mr-2 text-gray-400"></i>
+                        <span class="text-gray-400">info.jbsmun@gmail.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center fade-in-section">
+            <p class="text-gray-400 text-sm">© 2025 Jumeirah Baccalaureate School Model United Nations. All rights reserved.</p>
+            <div class="flex space-x-6 mt-4 md:mt-0">
+                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Code of Conduct</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Committee data
+    const committees = {
+        unsc: {
+            title: "Security Council",
+            description: "The United Nations Security Council (UNSC) is one of the six principal organs of the United Nations, charged with ensuring international peace and security. It has 15 members, including 5 permanent members with veto power (China, France, Russia, UK, and USA). The UNSC addresses the most pressing issues of international peace and security, including conflicts between states, humanitarian crises, and threats to international peace.",
+            delegates: "25-30 Delegates",
+            color: "bg-primary",
+            icon: "fa-balance-scale",
+            difficulty: "advanced",
+            topics: [
+                "Addressing the ongoing conflict in [specific region]",
+                "The role of peacekeeping operations in post-conflict zones",
+                "Non-proliferation of nuclear weapons",
+                "Cybersecurity threats to international peace"
+            ]
+        },
+        unep: {
+            title: "UN Environment Programme",
+            description: "The United Nations Environment Programme (UNEP) is the leading global environmental authority that sets the global environmental agenda, promotes the coherent implementation of the environmental dimension of sustainable development within the United Nations system, and serves as an authoritative advocate for the global environment. UNEP addresses issues such like climate change, disasters and conflicts, ecosystem management, environmental governance, chemicals and waste, resource efficiency, and environment under review.",
+            delegates: "40-50 Delegates",
+            color: "bg-green-700",
+            icon: "fa-leaf",
+            difficulty: "intermediate",
+            topics: [
+                "Combating plastic pollution in marine environments",
+                "Promoting circular economy models for sustainable development",
+                "Biodiversity conservation and ecosystem restoration",
+                "Climate change mitigation strategies for developing nations"
+            ]
+        },
+        who: {
+            title: "World Health Organization",
+            description: "The World Health Organization (WHO) is a specialized agency of the United Nations responsible for international public health. The WHO's constitution states its main objective as 'the attainment by all peoples of the highest possible level of health.' The WHO addresses global health issues including health emergencies, communicable and non-communicable diseases, health promotion through the life-course, health systems, and preparedness, surveillance and response.",
+            delegates: "35-45 Delegates",
+            color: "bg-red-700",
+            icon: "fa-heartbeat",
+            difficulty: "beginner",
+            topics: [
+                "Global pandemic preparedness and response mechanisms",
+                "Addressing health inequities in access to medicines",
+                "Mental health in post-conflict societies",
+                "Combating antimicrobial resistance"
+            ]
+        },
+        icj: {
+            title: "International Court of Justice",
+            description: "The International Court of Justice (ICJ) is the principal judicial organ of the United Nations. It settles legal disputes between states and gives advisory opinions on legal questions referred to it by authorized UN organs and specialized agencies. The ICJ deals with a wide range of legal issues including territorial disputes, maritime boundaries, diplomatic relations, state responsibility, and the use of force.",
+            delegates: "15-20 Delegates",
+            color: "bg-purple-700",
+            icon: "fa-gavel",
+            difficulty: "advanced",
+            topics: [
+                "The legality of unilateral sanctions",
+                "Maritime boundary disputes in the [specific region]",
+                "State responsibility for transboundary harm",
+                "The principle of non-intervention in domestic affairs"
+            ]
+        },
+        ecosoc: {
+            title: "Economic and Social Council",
+            description: "The United Nations Economic and Social Council (ECOSOC) is one of the six principal organs of the United Nations, responsible for coordinating the economic, social, and related work of 15 UN specialized agencies, their functional commissions and five regional commissions. ECOSOC serves as the central forum for discussing international economic and social issues, and for formulating policy recommendations addressed to member states and the United Nations system.",
+            delegates: "50-60 Delegates",
+            color: "bg-yellow-600",
+            icon: "fa-coins",
+            difficulty: "beginner",
+            topics: [
+                "Promoting sustainable industrialization in developing countries",
+                "Addressing the digital divide between developed and developing nations",
+                "Social protection systems and poverty eradication",
+                "Financing for sustainable development"
+            ]
+        },
+        csw: {
+            title: "Commission on the Status of Women",
+            description: "The Commission on the Status of Women (CSW) is the principal global intergovernmental body exclusively dedicated to the promotion of gender equality and the empowerment of women. A functional commission of the Economic and Social Council (ECOSOC), it was established in 1946. The CSW is instrumental in promoting women's rights, documenting the reality of women's lives throughout the world, and shaping global standards on gender equality and the empowerment of women.",
+            delegates: "30-40 Delegates",
+            color: "bg-pink-600",
+            icon: "fa-female",
+            difficulty: "intermediate",
+            topics: [
+                "Eliminating violence against women and girls",
+                "Women's economic empowerment in the digital age",
+                "Addressing gender disparities in education",
+                "Women's participation in peace processes and conflict resolution"
+            ]
+        },
+        unicef: {
+            title: "UNICEF",
+            description: "The United Nations Children's Fund (UNICEF) is a United Nations agency responsible for providing humanitarian and developmental aid to children worldwide. UNICEF's activities include providing immunizations and disease prevention, administering treatment for children and mothers with HIV, enhancing childhood and maternal nutrition, improving sanitation, promoting education, and providing emergency relief in response to disasters.",
+            delegates: "40-50 Delegates",
+            color: "bg-blue-500",
+            icon: "fa-child",
+            difficulty: "beginner",
+            topics: [
+                "Ensuring access to quality education for all children",
+                "Child protection in humanitarian emergencies",
+                "Nutrition and health interventions for children",
+                "Addressing child poverty and inequality"
+            ]
+        },
+        disarmament: {
+            title: "Disarmament Committee",
+            description: "The Disarmament Committee addresses issues related to arms control, non-proliferation of weapons of mass destruction, conventional weapons regulation, and confidence-building measures in the field of military activities. The committee works towards reducing global military expenditures and preventing the arms race in outer space.",
+            delegates: "35-45 Delegates",
+            color: "bg-orange-600",
+            icon: "fa-peace",
+            difficulty: "intermediate",
+            topics: [
+                "Regulating the trade of conventional arms",
+                "Preventing the weaponization of outer space",
+                "Nuclear disarmament and non-proliferation",
+                "Addressing the humanitarian impact of autonomous weapons"
+            ]
+        },
+        crisis: {
+            title: "Crisis Committee",
+            description: "The Crisis Committee is a fast-paced simulation that responds to breaking international crises with rapid decision-making. Delegates must think on their feet, respond to new information as it becomes available, and make quick decisions that could have significant consequences. Crisis committees often simulate historical events or hypothetical future scenarios.",
+            delegates: "20-25 Delegates",
+            color: "bg-red-800",
+            icon: "fa-fire",
+            difficulty: "advanced",
+            topics: [
+                "Responding to a sudden outbreak of hostilities",
+                "Managing a global health emergency",
+                "Addressing a coup d'état in a strategic country",
+                "Handling a major cybersecurity breach"
+            ]
+        }
+    };
+
+    // Committee modal functionality
+    const committeeModal = document.getElementById('committee-modal');
+    const closeModal = document.getElementById('close-modal');
+    const modalTitle = document.getElementById('modal-committee-title');
+    const modalDescription = document.getElementById('modal-committee-description');
+    const modalDelegates = document.getElementById('modal-committee-delegates');
+    const modalColor = document.getElementById('modal-committee-color');
+    const modalIcon = document.getElementById('modal-committee-icon');
+    const modalTopics = document.getElementById('modal-committee-topics');
+    const modalDifficulty = document.getElementById('modal-committee-difficulty');
+
+    document.querySelectorAll('.committee-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const committeeId = card.getAttribute('data-committee');
+            const committee = committees[committeeId];
+            
+            modalTitle.textContent = committee.title;
+            modalDescription.textContent = committee.description;
+            modalDelegates.textContent = committee.delegates;
+            modalColor.className = `h-48 md:h-64 rounded-lg flex items-center justify-center ${committee.color}`;
+            modalIcon.className = `fas ${committee.icon} text-white text-6xl`;
+            
+            // Update difficulty tag
+            modalDifficulty.textContent = committee.difficulty.charAt(0).toUpperCase() + committee.difficulty.slice(1);
+            modalDifficulty.className = `difficulty-tag ${committee.difficulty} ml-4`;
+            
+            // Update topics
+            modalTopics.innerHTML = '';
+            committee.topics.forEach(topic => {
+                const li = document.createElement('li');
+                li.textContent = topic;
+                modalTopics.appendChild(li);
+            });
+            
+            // Show modal
+            committeeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    closeModal.addEventListener('click', () => {
+        committeeModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    // Close modal when clicking outside content
+    committeeModal.addEventListener('click', (e) => {
+        if (e.target === committeeModal) {
+            committeeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Mobile menu toggle
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = this.querySelector('.menu-toggle-icon');
+        
+        menu.classList.toggle('open');
+        icon.classList.toggle('open');
+        
+        if (menu.classList.contains('open')) {
+            document.body.style.overflow = 'hidden';
+            // When opening, add the menu items' transitions
+            document.querySelectorAll('.mobile-menu-item').forEach((item, index) => {
+                item.style.transitionDelay = `${0.1 + (index * 0.05)}s`;
+            });
+        } else {
+            document.body.style.overflow = 'auto';
+            // When closing, remove the menu items' transitions
+            document.querySelectorAll('.mobile-menu-item').forEach(item => {
+                item.style.transitionDelay = '0s';
+            });
+        }
+    });
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.querySelector('.menu-toggle-icon');
+            
+            menu.classList.remove('open');
+            icon.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+    });
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-toggle').forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('i');
+            
+            button.classList.toggle('active');
+            content.classList.toggle('active');
+            
+            // Close other FAQs when opening a new one
+            if (content.classList.contains('active')) {
+                document.querySelectorAll('.faq-content').forEach(item => {
+                    if (item !== content && item.classList.contains('active')) {
+                        item.classList.remove('active');
+                        item.previousElementSibling.classList.remove('active');
+                    }
+                });
+            }
+        });
+    });
+
+    // Countdown timer
+    function updateCountdown() {
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        let targetDate = new Date(currentYear, 5, 20);
+        if (now > targetDate) {
+            targetDate = new Date(currentYear + 1, 5, 20);
+        }
+        const diff = targetDate - now;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('days').textContent = days.toString().padStart(2, '0');
+        document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+        document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+        document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const fadeInObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                fadeInObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(section => {
+        fadeInObserver.observe(section);
+    });
+
+    document.querySelectorAll('.committee-card').forEach((card, index) => {
+        // Add stagger delay classes
+        const delayClass = `stagger-delay-${(index % 5) + 1}`;
+        card.classList.add(delayClass);
+        
+        fadeInObserver.observe(card);
+    });
+
+    // Make countdown container appear
+    const countdownObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                countdownObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    countdownObserver.observe(document.querySelector('.countdown-container'));
+
+    // Navbar scroll effect - removed the hiding/showing logic
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        // Add shadow when scrolled
+        if (window.scrollY > 10) {
+            navbar.classList.add('shadow-xl');
+            navbar.classList.add('bg-opacity-90');
+            navbar.classList.remove('bg-opacity-100');
+        } else {
+            navbar.classList.remove('shadow-xl');
+            navbar.classList.remove('bg-opacity-90');
+            navbar.classList.add('bg-opacity-100');
+        }
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    document.querySelector('.menu-toggle-icon').classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+    });
+
+    // Committee filtering functionality
+    document.querySelectorAll('.filter-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            // Update active state of buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            const filter = this.getAttribute('data-filter');
+            const allCards = document.querySelectorAll('.committee-card');
+            
+            if (filter === 'all') {
+                // Show all cards
+                allCards.forEach(card => {
+                    card.classList.remove('hidden');
+                });
+            } else {
+                // Filter by difficulty
+                allCards.forEach(card => {
+                    const difficulty = card.getAttribute('data-difficulty');
+                    if (difficulty === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
