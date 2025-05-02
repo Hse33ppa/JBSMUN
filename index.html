@@ -270,7 +270,7 @@
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            transform: translateY(20px);
+            transform: translateY(20px;
             transition: transform 0.3s ease;
             position: relative;
         }
@@ -404,7 +404,6 @@
         <div class="container mx-auto px-6 py-3">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4">
-                    <img src="logo.jpg" alt="JBSMUN Logo" class="h-12 w-12 rounded-full">
                     <a href="#" class="text-xl font-bold transition-opacity hover:opacity-80">JBSMUN</a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
@@ -469,7 +468,7 @@
             <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in-section">Jumeirah Baccalaureate School Model United Nations</h1>
             <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto fade-in-section stagger-delay-1">Shaping Future Leaders Through Diplomatic Debate</p>
             <div class="countdown-container mb-8">
-                <h3 class="text-xl font-semibold mb-4">Conference Starts In:</h3>
+                <h3 class="text-xl font-semibound mb-4">Conference Starts In:</h3>
                 <div class="flex justify-center space-x-4" id="countdown">
                     <div class="countdown-item">
                         <div class="countdown-value" id="days">00</div>
@@ -540,260 +539,223 @@
                         <div class="text-secondary text-4xl mb-4">
                             <i class="fas fa-globe-americas floating floating-delay-2"></i>
                         </div>
-                        <h4 class="font-bold text-lg mb-2">Global Awareness</h4>
-                        <p class="text-gray-600">Gain deep understanding of international relations and current global issues.</p>
+        <h4 class="font-bold text-lg mb-2">Global Awareness</h4>
+        <p class="text-gray-600">Gain deep understanding of international relations and current global issues.</p>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="committees" class="py-32 bg-gray-100">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary fade-in-section">Our Committees</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="flex justify-center mb-12 fade-in-section">
+            <div class="flex flex-wrap gap-4 filter-buttons">
+                <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200 active" data-filter="all">
+                    All Committees
+                </button>
+                <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="beginner">
+                    Beginner
+                </button>
+                <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="intermediate">
+                    Intermediate
+                </button>
+                <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="advanced">
+                    Advanced
+                </button>
+            </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Beginner Committees -->
+            <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="hrc" data-difficulty="beginner">
+                <div class="h-48 bg-blue-600 flex items-center justify-center">
+                    <i class="fas fa-hand-holding-heart text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-primary">UN Human Rights Council</h3>
+                    <p class="text-gray-600 mb-4">Address global human rights violations and promote fundamental freedoms worldwide.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span>40-50 Delegates</span>
+                        <span class="difficulty-tag beginner ml-4">Beginner</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="committees" class="py-32 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary fade-in-section">Our Committees</h2>
             
-            <!-- Filter Buttons -->
-            <div class="flex justify-center mb-12 fade-in-section">
-                <div class="flex flex-wrap gap-4 filter-buttons">
-                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200 active" data-filter="all">
-                        All Committees
-                    </button>
-                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="beginner">
-                        Beginner
-                    </button>
-                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="intermediate">
-                        Intermediate
-                    </button>
-                    <button class="filter-btn bg-white text-primary px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="advanced">
-                        Advanced
-                    </button>
+            <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="csw" data-difficulty="beginner">
+                <div class="h-48 bg-pink-600 flex items-center justify-center">
+                    <i class="fas fa-female text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-primary">UN Commission on the Status of Women</h3>
+                    <p class="text-gray-600 mb-4">Promote gender equality and the empowerment of women worldwide.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span>30-40 Delegates</span>
+                        <span class="difficulty-tag beginner ml-4">Beginner</span>
+                    </div>
                 </div>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Beginner Committees -->
-                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="hrc" data-difficulty="beginner">
-                    <div class="h-48 bg-blue-600 flex items-center justify-center">
-                        <i class="fas fa-hand-holding-heart text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-primary">UN Human Rights Council</h3>
-                        <p class="text-gray-600 mb-4">Address global human rights violations and promote fundamental freedoms worldwide.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="fas fa-user-friends mr-2"></i>
-                            <span>40-50 Delegates</span>
-                            <span class="difficulty-tag beginner ml-4">Beginner</span>
-                        </div>
-                    </div>
+            <!-- Intermediate Committees -->
+            <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="unodc" data-difficulty="intermediate">
+                <div class="h-48 bg-purple-700 flex items-center justify-center">
+                    <i class="fas fa-pills text-white text-6xl"></i>
                 </div>
-                
-                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="csw" data-difficulty="beginner">
-                    <div class="h-48 bg-pink-600 flex items-center justify-center">
-                        <i class="fas fa-female text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-primary">UN Commission on the Status of Women</h3>
-                        <p class="text-gray-600 mb-4">Promote gender equality and the empowerment of women worldwide.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="fas fa-user-friends mr-2"></i>
-                            <span>30-40 Delegates</span>
-                            <span class="difficulty-tag beginner ml-4">Beginner</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Intermediate Committees -->
-                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="unodc" data-difficulty="intermediate">
-                    <div class="h-48 bg-purple-700 flex items-center justify-center">
-                        <i class="fas fa-pills text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-primary">UN Office on Drugs and Crime</h3>
-                        <p class="text-gray-600 mb-4">Combat illicit drugs, organized crime, corruption, and terrorism internationally.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="fas fa-user-friends mr-2"></i>
-                            <span>35-45 Delegates</span>
-                            <span class="difficulty-tag intermediate ml-4">Intermediate</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="disarmament" data-difficulty="intermediate">
-                    <div class="h-48 bg-green-700 flex items-center justify-center">
-                        <i class="fas fa-peace text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-primary">First General Assembly (Disarmament)</h3>
-                        <p class="text-gray-600 mb-4">Address arms control, non-proliferation, and international security issues.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="fas fa-user-friends mr-2"></i>
-                            <span>60-70 Delegates</span>
-                            <span class="difficulty-tag intermediate ml-4">Intermediate</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Advanced Committees -->
-                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="historical" data-difficulty="advanced">
-                    <div class="h-48 bg-yellow-600 flex items-center justify-center">
-                        <i class="fas fa-landmark text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-primary">Historical Security Council</h3>
-                        <p class="text-gray-600 mb-4">Revisit pivotal moments in history through the lens of international diplomacy.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="fas fa-user-friends mr-2"></i>
-                            <span>25-30 Delegates</span>
-                            <span class="difficulty-tag advanced ml-4">Advanced</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="marvel" data-difficulty="advanced">
-                    <div class="h-48 bg-red-700 flex items-center justify-center">
-                        <i class="fas fa-mask text-white text-6xl"></i>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-primary">Council of Marvel</h3>
-                        <p class="text-gray-600 mb-4">Navigate the complex geopolitics of the Marvel Universe with superhuman diplomacy.</p>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <i class="fas fa-user-friends mr-2"></i>
-                            <span>20-25 Delegates</span>
-                            <span class="difficulty-tag advanced ml-4">Advanced</span>
-                        </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-primary">UN Office on Drugs and Crime</h3>
+                    <p class="text-gray-600 mb-4">Combat illicit drugs, organized crime, corruption, and terrorism internationally.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span>35-45 Delegates</span>
+                        <span class="difficulty-tag intermediate ml-4">Intermediate</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="team" class="py-32 bg-white">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-primary fade-in-section">Meet Our Team</h2>
-            <div class="mb-16 fade-in-section stagger-delay-1">
-                <h3 class="text-2xl font-bold mb-8 text-center text-primary">Secretariat</h3>
-                <div class="grid md:grid-cols-2 gap-8 justify-center">
-                    <div class="team-member bg-gray-50 rounded-xl p-6 text-center transition-all hover:shadow-lg">
-                        <div class="w-32 h-32 mx-auto mb-4 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="fas fa-user-tie text-secondary text-4xl"></i>
-                        </div>
-                        <h4 class="text-xl font-bold">Aadit Sureka</h4>
-                        <p class="text-secondary font-medium mb-2">Secretary General</p>
-                        <p class="text-gray-600 text-sm">Grade 12 | Jumeirah Baccalaureate School</p>
-                    </div>
-                    <div class="team-member bg-gray-50 rounded-xl p-6 text-center transition-all hover:shadow-lg">
-                        <div class="w-32 h-32 mx-auto mb-4 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="fas fa-user-tie text-secondary text-4xl"></i>
-                        </div>
-                        <h4 class="text-xl font-bold">Lea Tabbal</h4>
-                        <p class="text-secondary font-medium mb-2">Secretary General</p>
-                        <p class="text-gray-600 text-sm">Grade 12 | Jumeirah Baccalaureate School</p>
+            
+            <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="disarmament" data-difficulty="intermediate">
+                <div class="h-48 bg-green-700 flex items-center justify-center">
+                    <i class="fas fa-peace text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-primary">First General Assembly (Disarmament)</h3>
+                    <p class="text-gray-600 mb-4">Address arms control, non-proliferation, and international security issues.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span>60-70 Delegates</span>
+                        <span class="difficulty-tag intermediate ml-4">Intermediate</span>
                     </div>
                 </div>
             </div>
-            <div class="fade-in-section stagger-delay-2">
-                <h3 class="text-2xl font-bold mb-8 text-center text-primary">Committee Chairs</h3>
-                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
-                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="fas fa-user text-secondary text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold">HRC Chair</h4>
-                        <p class="text-secondary text-sm mb-1">Human Rights Council Chair</p>
-                        <p class="text-gray-600 text-xs">Their grade</p>
-                    </div>
-                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
-                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="fas fa-user text-secondary text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold">CSW Chair</h4>
-                        <p class="text-secondary text-sm mb-1">Status of Women Chair</p>
-                        <p class="text-gray-600 text-xs">Grade 11</p>
-                    </div>
-                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
-                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="fas fa-user text-secondary text-2xl"></i>
-                        </div>
-                        <div class="font-bold">UNODC Chair</div>
-                        <p class="text-secondary text-sm mb-1">Drugs & Crime Chair</p>
-                        <p class="text-gray-600 text-xs"> Their grade</p>
-                    </div>
-                    <div class="team-member bg-gray-50 rounded-lg p-4 text-center transition-all hover:shadow-md">
-                        <div class="w-24 h-24 mx-auto mb-3 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="fas fa-user text-secondary text-2xl"></i>
-                        </div>
-                        <h4 class="font-bold">Marvel Chair</h4>
-                        <p class="text-secondary text-sm mb-1">Council of Marvel Chair</p>
-                        <p class="text-gray-600 text-xs"> Their grade</p>
+            
+            <!-- Advanced Committees -->
+            <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="historical" data-difficulty="advanced">
+                <div class="h-48 bg-yellow-600 flex items-center justify-center">
+                    <i class="fas fa-landmark text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-primary">Historical Security Council</h3>
+                    <p class="text-gray-600 mb-4">Revisit pivotal moments in history through the lens of international diplomacy.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span>25-30 Delegates</span>
+                        <span class="difficulty-tag advanced ml-4">Advanced</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="register" class="flag-bg py-32">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden fade-in-section">
-                <div class="md:flex">
-                    <div class="md:w-1/2 bg-primary text-white p-8 md:p-12">
-                        <h2 class="text-3xl font-bold mb-6">Register for JBSMUN 2025</h2>
-                        <p class="mb-6">Join us for an unforgettable experience in diplomacy, debate, and leadership development.</p>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 mt-1">
-                                    <i class="fas fa-calendar-check text-blue-300"></i>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="font-medium">June 20-22, 2025</p>
-                    <p class="text-blue-200 text-sm">2 days of intensive debate</p>
+            
+            <div class="committee-card bg-white rounded-xl overflow-hidden shadow-lg" data-committee="marvel" data-difficulty="advanced">
+                <div class="h-48 bg-red-700 flex items-center justify-center">
+                    <i class="fas fa-mask text-white text-6xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2 text-primary">Council of Marvel</h3>
+                    <p class="text-gray-600 mb-4">Navigate the complex geopolitics of the Marvel Universe with superhuman diplomacy.</p>
+                    <div class="flex items-center text-sm text-gray-500">
+                        <i class="fas fa-user-friends mr-2"></i>
+                        <span>20-25 Delegates</span>
+                        <span class="difficulty-tag advanced ml-4">Advanced</span>
+                    </div>
                 </div>
             </div>
-            <div class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                    <i class="fas fa-map-marker-alt text-blue-300"></i>
-                </div>
-                <div class="ml-3">
-                    <p class="font-medium">Jumeirah Baccalaureate School</p>
-                    <p class="text-blue-200 text-sm">Dubai, United Arab Emirates</p>
-                </div>
-            </div>
-            <div class="flex items-start">
-                <div class="flex-shrink-0 mt-1">
-                    <i class="fas fa-users text-blue-300"></i>
-                </div>
-                <div class="ml-3">
-                    <p class="font-medium">300+ Delegates Expected</p>
-                    <p class="text-blue-200 text-sm">From top schools in Dubai</p>
-                </div>
-            </div>
-        </div>
-        <div class="mt-8 pt-6 border-t border-blue-800">
-            <h3 class="font-bold mb-3">Registration Fees</h3>
-            <ul class="space-y-2">
-                <li class="flex justify-between">
-                    <span>Early Bird </span>
-                    <span class="font-bold">AED 200</span>
-                </li>
-                <li class="flex justify-between">
-                    <span>Regular </span>
-                    <span class="font-bold">AED 250</span>
-                </li>
-            </ul>
         </div>
     </div>
-    <div class="md:w-1/2 p-8 md:p-12 flex flex-col items-center justify-center">
-        <h3 class="text-2xl font-bold mb-6 text-center text-primary">Online Registration</h3>
-        <p class="text-gray-600 mb-8 text-center">Click the button below to complete your registration through our Google Form:</p>
-        <a href="YOUR_GOOGLE_FORM_LINK_HERE" 
-           target="_blank"
-           class="w-full bg-secondary hover:bg-primary text-white font-bold py-3 px-4 rounded-md transition-all duration-300 text-center btn-hover">
-            Go to Registration Form
-        </a>
-        <p class="text-sm text-gray-500 mt-4 text-center">
-            <i class="fas fa-external-link-alt mr-2"></i>
-            You'll be redirected to Google Forms
-        </p>
+</section>
+
+<section id="team" class="py-32 bg-white">
+    <div class="container mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-16 text-primary fade-in-section">Meet Our Team</h2>
+        <div class="mb-16 fade-in-section stagger-delay-1">
+            <h3 class="text-2xl font-bold mb-8 text-center text-primary">Secretariat</h3>
+            <div class="grid md:grid-cols-2 gap-8 justify-center">
+                <div class="team-member bg-gray-50 rounded-xl p-6 text-center transition-all hover:shadow-lg">
+                    <div class="w-32 h-32 mx-auto mb-4 flex items-center justify-center bg-blue-100 rounded-full">
+                        <i class="fas fa-user-tie text-secondary text-4xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold">Aadit Sureka</h4>
+                    <p class="text-secondary font-medium mb-2">Secretary General</p>
+                    <p class="text-gray-600 text-sm">Grade 12 | Jumeirah Baccalaureate School</p>
+                </div>
+                <div class="team-member bg-gray-50 rounded-xl p-6 text-center transition-all hover:shadow-lg">
+                    <div class="w-32 h-32 mx-auto mb-4 flex items-center justify-center bg-blue-100 rounded-full">
+                        <i class="fas fa-user-tie text-secondary text-4xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold">Lea Tabbal</h4>
+                    <p class="text-secondary font-medium mb-2">Secretary General</p>
+                    <p class="text-gray-600 text-sm">Grade 12 | Jumeirah Baccalaureate School</p>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
+
+<section id="register" class="flag-bg py-32">
+    <div class="container mx-auto px-6">
+        <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-xl overflow-hidden fade-in-section">
+            <div class="md:flex">
+                <div class="md:w-1/2 bg-primary text-white p-8 md:p-12">
+                    <h2 class="text-3xl font-bold mb-6">Register for JBSMUN 2025</h2>
+                    <p class="mb-6">Join us for an unforgettable experience in diplomacy, debate, and leadership development.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fas fa-calendar-check text-blue-300"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-medium">June 20-22, 2025</p>
+                <p class="text-blue-200 text-sm">2 days of intensive debate</p>
+            </div>
+        </div>
+        <div class="flex items-start">
+            <div class="flex-shrink-0 mt-1">
+                <i class="fas fa-map-marker-alt text-blue-300"></i>
+            </div>
+            <div class="ml-3">
+                <p class="font-medium">Jumeirah Baccalaureate School</p>
+                <p class="text-blue-200 text-sm">Dubai, United Arab Emirates</p>
+            </div>
+        </div>
+        <div class="flex items-start">
+            <div class="flex-shrink-0 mt-1">
+                <i class="fas fa-users text-blue-300"></i>
+            </div>
+            <div class="ml-3">
+                <p class="font-medium">300+ Delegates Expected</p>
+                <p class="text-blue-200 text-sm">From top schools in Dubai</p>
+            </div>
+        </div>
+    </div>
+    <div class="mt-8 pt-6 border-t border-blue-800">
+        <h3 class="font-bold mb-3">Registration Fees</h3>
+        <ul class="space-y-2">
+            <li class="flex justify-between">
+                <span>Early Bird </span>
+                <span class="font-bold">AED 200</span>
+            </li>
+            <li class="flex justify-between">
+                <span>Regular </span>
+                <span class="font-bold">AED 250</span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="md:w-1/2 p-8 md:p-12 flex flex-col items-center justify-center">
+    <h3 class="text-2xl font-bold mb-6 text-center text-primary">Online Registration</h3>
+    <p class="text-gray-600 mb-8 text-center">Click the button below to complete your registration through our Google Form:</p>
+    <a href="YOUR_GOOGLE_FORM_LINK_HERE" 
+       target="_blank"
+       class="w-full bg-secondary hover:bg-primary text-white font-bold py-3 px-4 rounded-md transition-all duration-300 text-center btn-hover">
+        Go to Registration Form
+    </a>
+    <p class="text-sm text-gray-500 mt-4 text-center">
+        <i class="fas fa-external-link-alt mr-2"></i>
+        You'll be redirected to Google Forms
+    </p>
+</div>
 </div>
 </div>
 </div>
@@ -894,13 +856,8 @@
                 </ul>
             </div>
         </div>
-        <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center fade-in-section">
-            <p class="text-gray-400 text-sm">© 2025 Jumeirah Baccalaureate School Model United Nations. All rights reserved.</p>
-            <div class="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Terms of Service</a>
-                <a href="#" class="text-gray-400 hover:text-white text-sm transition">Code of Conduct</a>
-            </div>
+        <div class="border-t border-gray-800 mt-12 pt-8 text-center fade-in-section">
+            <p class="text-gray-400 text-sm">Created by Adithyanarayan Rajesh - USG of Technical at JBSMUN</p>
         </div>
     </div>
 </footer>
